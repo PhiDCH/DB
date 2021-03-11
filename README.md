@@ -1,3 +1,8 @@
+- [x] add test_img folder
+- [x] add a notebook for run code on colab 
+
+
+
 ## News
 * DB is included in [OpenCV](https://github.com/opencv/opencv/blob/master/doc/tutorials/dnn/dnn_text_spotting/dnn_text_spotting.markdown)
 * DB is included in [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR)
