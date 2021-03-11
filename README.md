@@ -1,4 +1,4 @@
-- [x] add test_img folder
+- [x] add test_img, pretrain, result folder
 - [x] add a notebook for run code on colab 
 
 
