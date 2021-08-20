@@ -2,6 +2,7 @@ import os
 
 import torch
 from tqdm import tqdm
+import time
 
 from experiment import Experiment
 from data.data_loader import DistributedSampler
@@ -65,6 +66,7 @@ class Trainer:
 
         model.train()
         while True:
+            second = time.time()
             self.logger.info('Training epoch ' + str(epoch))
             self.logger.epoch(epoch)
             self.total = len(train_data_loader)
@@ -94,6 +96,16 @@ class Trainer:
                 self.steps += 1
                 self.logger.report_eta(self.steps, self.total, epoch)
 
+            run_time_epoch = (time.time()-second)/60    
+            print('tranning 1 epoch takes ', run_time_epoch)
+            if epoch % 4 ==0:
+                dir_save = '/content/drive/MyDrive/MyComputer/freelance'
+                check_point_name = 'DBNet.pth'
+                print('Save checkpoint at ')
+                print(dir_save)
+                print('\n')
+                torch.save(model.state_dict(), os.path.join(dir_save, check_point_name)) 
+            
             epoch += 1
             if epoch > self.experiment.train.epochs:
                 self.model_saver.save_checkpoint(model, 'final')
@@ -157,13 +169,7 @@ class Trainer:
                     all_matircs[key].update(metric.val, metric.count)
                 else:
                     all_matircs[key] = metric
-                    
-        dir_save = '/content/drive/MyDrive/MyComputer/freelancer'
-        check_point_name = 'DBNet'
-        print('Save checkpoint at ')
-        print(dir_save)
-        print('\n')
-        torch.save(model.state_dict(), os.path.join(dir_save, check_point_name))                    
+                                       
 
         for key, metric in all_matircs.items():
             self.logger.info('%s : %f (%d)' % (key, metric.avg, metric.count))
