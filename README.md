@@ -1,5 +1,5 @@
-- [x] add test_img, pretrain, result folder
 - [x] add a notebook for run code on colab 
+https://colab.research.google.com/drive/1A5yKjZSTlcbAlgiGy2xUCuCRN8QqaDOq?usp=sharing
 
 
 
