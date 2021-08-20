@@ -157,6 +157,13 @@ class Trainer:
                     all_matircs[key].update(metric.val, metric.count)
                 else:
                     all_matircs[key] = metric
+                    
+        dir_save = '/content/drive/MyDrive/MyComputer/freelancer'
+        check_point_name = 'DBNet'
+        print('Save checkpoint at ')
+        print(dir_save)
+        print('\n')
+        torch.save(model.state_dict(), os.path.join(dir_save, check_point_name))                    
 
         for key, metric in all_matircs.items():
             self.logger.info('%s : %f (%d)' % (key, metric.avg, metric.count))
